@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="greeter" class="ex01.Greeter">
+		<!-- ex01.Greeter greeter = new greeter(); -->
+		
+		<property name="format" value="%s님 하이요!"/>
+		<!-- greeter.setFormet("%s님 하이요!") -->
+	
+	</bean>
+
+</beans>
