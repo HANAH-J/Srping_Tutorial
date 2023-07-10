@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Ctx02.xml : printer -->
+	
+	<bean class="spring.printer.MemberPrinter" id="memberPrinter">
+	</bean>
+	
+	<bean class="spring.printer.MemberListPrinter" id="listPrinter">
+		<constructor-arg ref="memberDao"/>
+		<constructor-arg ref="memberPrinter"/>
+	</bean>
+	
+	<bean class="spring.printer.MemberInfoPrinter" id="infoPrinter">
+		<property name="memberDao" ref="memberDao"></property>
+		<property name="printer" ref="memberPrinter"></property>
+	</bean>
+	
+	<bean class="spring.printer.VersionPrinter" id="versionPrinter">
+		<!-- 생성자를 통한 주입 -->
+<!--
+		<constructor-arg value="5"/>
+		<constructor-arg>
+			<value>3</value>
+		</constructor-arg>
+-->
+		
+		<!-- Setter를 통한 주입 -->
+		<property name="majorVersion" value="5"></property>
+		<property name="minorVersion">
+			<value>3</value>
+		</property>
+	</bean>
+	
+</beans>
