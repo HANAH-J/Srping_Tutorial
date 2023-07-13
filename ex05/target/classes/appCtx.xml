@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="client" class="spring.beans.Client">
+		<property name="host" value="웹서버"/>
+	</bean>
+	
+	<bean id="client2" class="spring.beans.Client2" 
+	init-method="connect"			destroy-method="close">
+<!-- 빈 객체가 초기화될 때 사용할 메서드		빈 객체가 소멸될 때 사용할 메서드-->
+		<property name="host" value="웹서버"/>
+	</bean>
+</beans>
