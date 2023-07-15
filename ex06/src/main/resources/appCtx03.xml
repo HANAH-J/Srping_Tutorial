@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- 대상 객체를 빈으로 등록 -->
+	<bean class="spring.calc.ImpeCalculator" id="impeCalc"></bean>
+	<bean class="spring.calc.RecCalculator" id="recCalc"></bean>
+	
+	<!-- 프록시 객체도 빈으로 등록 -->
+	<bean class="spring.aspect.ExeTimeAspect1" id="exeTimeAspect"/>
+	<bean class="spring.aspect.CacheAspect" id="cacheAspect"/>
+	
+	<!--  Aspect 기능 설정 -->
+	<aop:config>
+		<aop:aspect id="measureAspect" ref="exeTimeAspect" order="0">
+			<aop:pointcut expression="execution(public * spring.calc..*(..))" id="factorialMethod"/>
+			<aop:around method="measure" pointcut-ref="factorialMethod"/>
+		</aop:aspect>
+		
+		<aop:aspect id="calcCache" ref="cacheAspect" order="1">
+			<aop:pointcut expression="execution(public * spring.calc..*(..))" id="cacheMethod"/>
+			<aop:around method="cacheExecute" pointcut-ref="cacheMethod"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
